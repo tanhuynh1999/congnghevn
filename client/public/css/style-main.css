@@ -1,0 +1,79 @@
+:root{
+    
+}
+
+*{
+
+}
+
+html{
+
+}
+
+/*common*/
+.cp-icon{
+    cursor: pointer;
+}
+
+.cp{
+    cursor: pointer;
+}
+
+.cp-icon:hover{
+    font-size: 18px;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.float-right{
+    float: right;
+}
+
+/*--------------------*/
+.cn-table{
+
+}
+
+.cn-table .image{
+    height: 100px;
+}
+
+.cn-filter{
+
+}
+
+.cn-filter .dropdown-menu {
+    left: -100px;
+}
+
+.cn-create{
+
+}
+
+.cn-create .el-dialog {
+    width: 70%;
+}
+
+.cn-create .el-form--label-top .el-form-item__label {
+    padding: 0px 0 0px;
+    font-weight: bold;
+}
+
+.cn-create .el-form-item {
+    margin-bottom: 10px;
+}
+
+.cn-create .image-upload{
+    width: 200px;
+    height: 180px;
+}
+
+.cn-create .image-upload:hover{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.el-dialog__wrapper {
+    top: -100px !important;
+}
