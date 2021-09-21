@@ -1,4 +1,4 @@
-<el-dialog class="cn-create" title="Shipping address" :visible.sync="dialogFormCreateProductVisible">
+<el-dialog class="cn-create" :title="title" :visible.sync="dialogFormCreateProductVisible">
     <el-form :model="productForm" 
              :label-position="labelPositionTop"
              :rules="productValidate" 
@@ -64,11 +64,9 @@
                 <el-form-item label="Nội dung">
                     <el-input type="textarea" v-model="productForm.content" placeholder="Vui lòng mô tả"></el-input>
                 </el-form-item>
-                <el-form-item label="Lượt xem" prop="view">
+                <el-form-item label="Lượt xem">
                     <el-input-number v-model="productForm.view" 
-                                     :min="1"
-                                     maxlength="50"
-                                     show-word-limit></el-input-number>
+                                     :min="1"></el-input-number>
                 </el-form-item>
                 <el-form-item label="Tình trạng" prop="active">
                     <el-switch v-model="productForm.active"></el-switch>

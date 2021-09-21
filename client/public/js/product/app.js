@@ -129,17 +129,10 @@ var Main = {
                         message: 'Vượt quá số ký tự cho phép', 
                         trigger: 'change' 
                     }
-                ],
-                view: [
-                    {        
-                        max: 50, 
-                        message: 'Vượt quá số ký tự cho phép', 
-                        trigger: 'change' 
-                    }
                 ]
             },
             multipleSelection: [],
-            dialogFormCreateProductVisible: true,
+            dialogFormCreateProductVisible: false,
             labelPositionTop: 'top',
             activeMain: 'index',
             search: '',
@@ -167,6 +160,11 @@ var Main = {
             if (file) {
                 reader.readAsDataURL(file);
             }
+        },
+        clickCreateProduct()
+        {
+            this.dialogFormCreateProductVisible = true;
+            this.title = "Thêm sản phẩm mới";
         }
     }
 };
