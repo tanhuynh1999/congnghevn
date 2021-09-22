@@ -27,6 +27,10 @@ html{
     width: 100%;
 }
 
+.ml-2{
+    margin-left: 2%;
+}
+
 .float-right{
     float: right;
 }
@@ -73,6 +77,11 @@ html{
 .cn-create .image-upload:hover{
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
+
+.cn-create .el-button {
+    margin: 0px 9px;
+}
+
 
 .el-dialog__wrapper {
     top: -100px !important;

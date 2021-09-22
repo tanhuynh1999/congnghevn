@@ -90,6 +90,14 @@ var Main = {
                         label: 'Phần cứng',
                         value: '3'
                     }
+                ],
+                indexProductAPI: [
+                    {
+                        "userId": 1,
+                        "id": 1,
+                        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+                        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+                    }
                 ]
             },
             productForm: {
@@ -102,6 +110,12 @@ var Main = {
                 price: '',
                 view: '',
                 active: true,
+            },
+            productAPIForm: {
+                link: '',
+                user: '',
+                password: '',
+                key: ''
             },
             productValidate: {
                 name: [
@@ -131,12 +145,22 @@ var Main = {
                     }
                 ]
             },
+            productAPIValidate: {
+
+            },
             multipleSelection: [],
             dialogFormCreateProductVisible: false,
             labelPositionTop: 'top',
             activeMain: 'index',
             search: '',
-            valueAction: ''
+            valueAction: '',
+            isCreate: false,
+            isCreateAPI: false,
+            loadingForm: false,
+            loadingTable: false,
+            activeInstructCreateAPI: ['1','2','3'],
+            progress: 0,
+            isProgressCreateAPI: false
         }
     },
     mounted() {
@@ -163,8 +187,99 @@ var Main = {
         },
         clickCreateProduct()
         {
-            this.dialogFormCreateProductVisible = true;
-            this.title = "Thêm sản phẩm mới";
+            let that = this;
+            that.isCreate = true;
+            that.dialogFormCreateProductVisible = true;
+            that.title = "Thêm sản phẩm mới";
+
+            this.setTimeout1sLoading();
+            that.colorCreate = '#909399';
+            that.textCreate = '#FFF';
+        },
+        clickCreateProductSub()
+        {
+            let that = this;
+            this.clearForm();
+            that.isCreate = true;
+            that.title = "Thêm sản phẩm mới";
+            this.setTimeout1sLoading();
+
+            that.colorCreate = '#909399';
+            that.textCreate = '#FFF';
+        },
+        clickCreateAPIProduct()
+        {
+            let that = this;
+            this.clearForm();
+            that.isCreateAPI = true;
+            that.title = "Thêm sản phẩm bằng API";
+
+            this.setTimeout1sLoading();
+            that.colorCreateAPI = '#909399';
+            that.textCreateAPI = '#FFF';
+        },
+        createProduct(productForm)
+        {
+            let that = this;
+            that.$refs[productForm].validate((valid) => {
+                if (valid) {
+                    console.log(this.productForm);
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        createProductAPI(productAPIForm)
+        {
+            let that = this;
+            that.isProgressCreateAPI = true;
+            that.loadingTable = true;
+            that.$refs[productAPIForm].validate((valid) => {
+                if (valid) {
+                    console.log(this.productAPIForm);
+                    $.ajax({
+                        url: this.productAPIForm.link,
+                        type: "GET",
+                        dataType: 'json',
+                        async: true,
+                        contentType: 'application/json; charset=UTF-8',
+                        success: function (rs) {
+                            var data = JSON.parse(JSON.stringify(rs))
+                            data.forEach((item, index) => {
+                                setTimeout(function(){
+                                    that.progress = index + 1;
+                                    that.listData.indexProductAPI.push(item);
+                                 }, 1000);
+                            })
+                            that.loadingTable = false;
+                        },
+                        error: function (xhr, status, err) { }
+                    });
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        clearForm()
+        {
+            let that = this;
+            that.isCreate = false;
+            that.isCreateAPI = false;
+            that.textCreate = '';
+            that.textCreateAPI = '';
+            that.colorCreate = '';
+            that.colorCreateAPI = '';
+        },
+        setTimeout1sLoading()
+        {
+            let that = this;
+            that.loadingForm = true;
+
+            setTimeout(function(){ 
+                that.loadingForm = false;
+            }, 1000);
         }
     }
 };
