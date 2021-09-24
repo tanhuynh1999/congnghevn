@@ -47,6 +47,16 @@
                                 prop="body"
                                 label="body">
                     </el-table-column>
+                    <el-table-column label="Hoạt động">
+                        <template slot-scope="scope">
+                            <span>
+                                <i class="fa fa-eye cp-icon" aria-hidden="true"></i> |
+                            </span>
+                            <span  @click   ="deleteRowCretateAPI(scope.$index, listData.indexProductAPI)">
+                                <i class="fa fa-trash cp-icon" aria-hidden="true"></i> 
+                            </span>
+                        </template>
+                    </el-table-column>
                 </el-table>
             </el-card>
         </div>

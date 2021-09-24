@@ -13,7 +13,9 @@
                        round
                        plain
                        size="small"
-                       class="float-right">
+                       class="float-right"
+                       @click="clickCreateSettingProduct"
+                       :style="'color: ' + textCreateSetting + '; background-color: ' + colorCreateSetting + ';'">
                 <i class="fa fa-cog" aria-hidden="true"></i>
                  Cài đặt
             </el-button>
@@ -52,5 +54,8 @@
     </div>
     <div v-if="isCreateAPI == true" v-loading="loadingForm">
         {{> product/form-createapi}}
+    </div>
+    <div v-if="isSettingCreate == true" v-loading="loadingForm">
+        {{> product/form-create-setting}}
     </div>
 </el-dialog>

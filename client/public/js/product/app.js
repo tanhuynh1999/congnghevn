@@ -98,6 +98,44 @@ var Main = {
                         "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
                         "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
                     }
+                ],
+                optionsFonts: [
+                    {
+                        value: 'Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif',
+                        label: 'Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif'
+                    }
+                ],
+                optionsUser: [
+                    {
+                        value: 'tan.hm',
+                        label: 'tan.hm',
+                    }
+                ],
+                optionsBnt: [
+                    {
+                        label: 'Thêm sản phẩm',
+                        value: '1',
+                    },
+                    {
+                        label: 'Thêm API',
+                        value: '2',
+                    },
+                    {
+                        label: 'Thêm tải lên',
+                        value: '3',
+                    },
+                    {
+                        label: 'Cài đặt',
+                        value: '4',
+                    },
+                    {
+                        label: 'Cài đặt giao diện',
+                        value: '5',
+                    },
+                    {
+                        label: 'Cài đặt mật khẩu',
+                        value: '6',
+                    }
                 ]
             },
             productForm: {
@@ -116,6 +154,18 @@ var Main = {
                 user: '',
                 password: '',
                 key: ''
+            },
+            settingForm: {
+                bgcolor: false,
+                bgcolorMain: '',
+                fonts: ''
+            },
+            createPasswordForm: {
+                btn: [],
+                useraccess: [],
+                usereditpassword: [],
+                password: '',
+                respassword: ''
             },
             productValidate: {
                 name: [
@@ -148,6 +198,9 @@ var Main = {
             productAPIValidate: {
 
             },
+            createPasswordValidate: {
+                
+            },
             multipleSelection: [],
             dialogFormCreateProductVisible: false,
             labelPositionTop: 'top',
@@ -156,11 +209,14 @@ var Main = {
             valueAction: '',
             isCreate: false,
             isCreateAPI: false,
+            isSettingCreate: false,
             loadingForm: false,
             loadingTable: false,
             activeInstructCreateAPI: ['1','2','3'],
             progress: 0,
-            isProgressCreateAPI: false
+            isProgressCreateAPI: false,
+            bg: '#fff',
+            tabPositionLeft: 'left'
         }
     },
     mounted() {
@@ -218,6 +274,18 @@ var Main = {
             that.colorCreateAPI = '#909399';
             that.textCreateAPI = '#FFF';
         },
+        clickCreateSettingProduct()
+        {
+            let that = this;
+            this.clearForm();
+            that.isSettingCreate = true;
+            that.title = "Cài đặt";
+
+            this.setTimeout1sLoading();
+            that.colorCreateSetting = '#909399';
+            that.textCreateSetting = '#FFF';
+
+        },
         createProduct(productForm)
         {
             let that = this;
@@ -234,43 +302,67 @@ var Main = {
         {
             let that = this;
             that.isProgressCreateAPI = true;
-            that.loadingTable = true;
             that.$refs[productAPIForm].validate((valid) => {
                 if (valid) {
                     console.log(this.productAPIForm);
-                    $.ajax({
-                        url: this.productAPIForm.link,
-                        type: "GET",
-                        dataType: 'json',
-                        async: true,
-                        contentType: 'application/json; charset=UTF-8',
-                        success: function (rs) {
-                            var data = JSON.parse(JSON.stringify(rs))
-                            data.forEach((item, index) => {
-                                setTimeout(function(){
-                                    that.progress = index + 1;
-                                    that.listData.indexProductAPI.push(item);
-                                 }, 1000);
-                            })
-                            that.loadingTable = false;
-                        },
-                        error: function (xhr, status, err) { }
-                    });
+                    axios.get(this.productAPIForm.link)
+                        .then(function (response) {
+                            // handle success
+                            console.log(response.data);
+                            that.listData.indexProductAPI = response.data;
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        })
+                        .then(function () {
+                            // always executed
+                        });
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
+        createPasswordCreate(createPasswordForm)
+        {
+            let that = this;
+            that.$refs[createPasswordForm].validate((valid) => {
+                if (valid) {
+                    console.log(that.createPasswordForm);
+                } else {
+                    console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        deleteRowCretateAPI(index, rows)
+        {
+            rows.splice(index, 1);
+        },
+        changeBG(settingForm)
+        {
+            let that = this;
+            if(that.settingForm.bgcolor)
+            {
+                that.bg = "red";
+            }
+            else{
+                that.bg = "#fff";
+            }
+        },
         clearForm()
         {
             let that = this;
             that.isCreate = false;
             that.isCreateAPI = false;
+            that.isSettingCreate = false;
             that.textCreate = '';
             that.textCreateAPI = '';
+            that.textCreateSetting = '';
             that.colorCreate = '';
             that.colorCreateAPI = '';
+            that.colorCreateSetting = '';
         },
         setTimeout1sLoading()
         {
