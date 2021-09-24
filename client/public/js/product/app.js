@@ -25,7 +25,16 @@ var Main = {
                     code: 'BP-2',
                     name: 'Bàn phím đẹp và chất lượng',
                     image: 'https://www.anphatpc.com.vn/media/news/1308_Cyberborad.jpg',
-                    category: 'Dụng cụ máy tính',
+                    category: [
+                        {
+                            label: 'Dụng cụ máy tính',
+                            value: '1'
+                        },
+                        {
+                            label: 'Phần cứng',
+                            value: '3'
+                        }
+                    ],
                     price: '40.000 vnđ',
                     view: '20',
                     describe: 'Bàn phím cơ Rapoo Gaming V806 LED RGB được thiết kế và sản xuất bởi hãng Rapoo – công ty chuyên về thiết kế, phát triển và sản xuất các thiết bị ngoại vi như chuột, bàn phím, tai nghe chuyên dùng cho gaming đang được các game thủ Việt Nam ưa chuộng trong thời gian gần đây.',
@@ -57,6 +66,20 @@ var Main = {
                     {
                         label: 'Thùng rác',
                         name: 'bin'
+                    }
+                ],
+                tabsHistory:  [
+                    {
+                        label: 'Tổng lịch sử',
+                        name: 'all'
+                    },
+                    {
+                        label: 'Lịch sử truy cập',
+                        name: 'access'
+                    },
+                    {
+                        label: 'Lịch sử thay đổi',
+                        name: 'change'
                     }
                 ],
                 optionsAction: [
@@ -136,6 +159,54 @@ var Main = {
                         label: 'Cài đặt mật khẩu',
                         value: '6',
                     }
+                ],
+                timelineHistory: [
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        timestamp: '24-09-2021'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        timestamp: '24-09-2021'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        timestamp: '24-09-2021'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        timestamp: '24-09-2021'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        timestamp: '24-09-2021'
+                    }
+                ],
+                tableHistory: [
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        datecreate: '24-09-2021',
+                        ip: '178.259.367.1.2',
+                        usercreate: 'tanhuynh'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        datecreate: '24-09-2021',
+                        ip: '178.259.367.1.2',
+                        usercreate: 'tanhuynh'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        datecreate: '24-09-2021',
+                        ip: '178.259.367.1.2',
+                        usercreate: 'tanhuynh'
+                    },
+                    {
+                        content: 'tanhuynh đã thay đổi sản phẩm',
+                        datecreate: '24-09-2021',
+                        ip: '178.259.367.1.2',
+                        usercreate: 'tanhuynh'
+                    }
                 ]
             },
             productForm: {
@@ -203,8 +274,12 @@ var Main = {
             },
             multipleSelection: [],
             dialogFormCreateProductVisible: false,
+            dialogFormEditProductVisible: false,
+            dialogBodyDetailsProductVisible: false,
             labelPositionTop: 'top',
             activeMain: 'index',
+            activeDetailsProduct: 'body',
+            activeHistory: 'all',
             search: '',
             valueAction: '',
             isCreate: false,
@@ -216,7 +291,9 @@ var Main = {
             progress: 0,
             isProgressCreateAPI: false,
             bg: '#fff',
-            tabPositionLeft: 'left'
+            tabPositionLeft: 'left',
+            reverseHistory: true,
+            radioHistory: 'Tổng lịch sử'
         }
     },
     mounted() {
@@ -240,6 +317,43 @@ var Main = {
             if (file) {
                 reader.readAsDataURL(file);
             }
+        },
+        clickDetailsProduct(row)
+        {
+            let that = this;
+            this.clearForm();
+            that.dialogBodyDetailsProductVisible = true;
+            that.title = "Xem chi tiết - " + row.name;
+
+            that.code = row.code;
+            that.name = row.name;
+            that.image = row.image;
+            that.category = row.category;
+            that.price = row.price;
+            that.view = row.view;
+            that.describe = row.describe;
+            that.content = row.content;
+            that.datecreate = row.datecreate;
+            that.datemodified = row.datemodified;
+            that.usercreate = row.usercreate;
+            that.usermodified = row.usermodified;
+            that.active = row.active;
+            that.bin = row.bin;
+            that.follow = row.follow;
+            that.note = row.note;
+
+
+            that.activeColor = row.active ? 'success' : 'default';
+            that.activeText = row.active ? 'Hoạt động' : 'Không hoạt động';
+
+            that.followColor = row.follow ? 'success' : 'default';
+            that.followText = row.follow ? 'Đang theo dõi' : 'Không theo dõi';
+
+            that.noteColor = row.note ? 'success' : 'default';
+            that.noteText = row.note ? 'Đang chú ý' : 'Không chú ý';
+
+            that.binColor = row.bin ? 'success' : 'default';
+            that.binText = row.bin ? 'Yes' : 'No';
         },
         clickCreateProduct()
         {
@@ -285,6 +399,14 @@ var Main = {
             that.colorCreateSetting = '#909399';
             that.textCreateSetting = '#FFF';
 
+        },
+        clickEditProduct(row)
+        {
+            let that = this;
+            this.clearForm();
+            this.productForm = JSON.parse(JSON.stringify(row));
+            that.dialogFormEditProductVisible = true;
+            that.title = "Sửa sản phẩm - " + row.name;
         },
         createProduct(productForm)
         {
@@ -335,6 +457,36 @@ var Main = {
                     return false;
                 }
             });
+        },
+        handleClickDetails()
+        {
+            let that = this;
+            if(that.activeDetailsProduct == 'history')
+            {
+                that.titleHis = 'Tổng lịch sử';
+            }
+            else{
+                console.log('!!!');
+            }
+        },
+        handleClickHistorySub()
+        {
+            let that = this;
+            if(that.activeHistory == 'change')
+            {
+                that.titleHis = 'Lịch sử thay đổi';
+            }
+            else if(that.activeHistory == 'access')
+            {
+                that.titleHis = 'Lịch sử truy cập';
+            }
+            else if(that.activeHistory == 'all')
+            {
+                that.titleHis = 'Tổng lịch sử';
+            }
+            else{
+                console.log('!!!');
+            }
         },
         deleteRowCretateAPI(index, rows)
         {

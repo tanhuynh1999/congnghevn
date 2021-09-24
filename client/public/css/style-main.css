@@ -31,6 +31,10 @@ html{
     margin-left: 2%;
 }
 
+.mt-2 {
+    margin-top: 2%;
+}
+
 .float-right{
     float: right;
 }
@@ -85,4 +89,22 @@ html{
 
 .el-dialog__wrapper {
     top: -100px !important;
+}
+
+.cn-edit .el-dialog {
+    width: 70%;
+}
+
+.cn-edit .image-upload{
+    width: 200px;
+    height: 180px;
+}
+
+.cn-details .el-dialog {
+    width: 70%;
+}
+
+.cn-details .img{
+    width: 230px;
+    height: 200px;
 }
