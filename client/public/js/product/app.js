@@ -12,12 +12,12 @@ var Main = {
                     view: '20',
                     describe: 'Bàn phím cơ Rapoo Gaming V806 LED RGB được thiết kế và sản xuất bởi hãng Rapoo – công ty chuyên về thiết kế, phát triển và sản xuất các thiết bị ngoại vi như chuột, bàn phím, tai nghe chuyên dùng cho gaming đang được các game thủ Việt Nam ưa chuộng trong thời gian gần đây.',
                     content: 'Công tắc phím cơ Omron quá quen thuộc với các sản phẩm Logitech nay đã song hành cùng Bàn phím cơ Rapoo Gaming V806. Với tuổi thọ một phím lên tới 70 triệu lượt nhấn, rất bền và đáng tin cậy trong trò chơi. Thiết kế không xung đột cho 104 phím trên bàn phím, cho phép bạn nhấn đồng thời bất kỳ số lượng phím nào và đảm bảo rằng mọi lệnh của bạn được đăng ký và thực hiện chính xác và nhanh chóng.',
-                    datecreate: '21/09/2021 lúc 2:26',
-                    datemodified: '21/09/2021 lúc 2:26',
-                    usercreate: 'tanhuynh',
-                    usermodified: 'tanhuynh',
+                    dateCreate: '21/09/2021 lúc 2:26',
+                    dateModified: '21/09/2021 lúc 2:26',
+                    userCreate: 'tanhuynh',
+                    userModified: 'tanhuynh',
                     active: true,
-                    bin: false,
+                    bin: true,
                     follow: false,
                     note: false
                 }, 
@@ -25,27 +25,18 @@ var Main = {
                     code: 'BP-2',
                     name: 'Bàn phím đẹp và chất lượng',
                     image: 'https://www.anphatpc.com.vn/media/news/1308_Cyberborad.jpg',
-                    category: [
-                        {
-                            label: 'Dụng cụ máy tính',
-                            value: '1'
-                        },
-                        {
-                            label: 'Phần cứng',
-                            value: '3'
-                        }
-                    ],
+                    category: 'Dụng cụ máy tính',
                     price: '40.000 vnđ',
                     view: '20',
                     describe: 'Bàn phím cơ Rapoo Gaming V806 LED RGB được thiết kế và sản xuất bởi hãng Rapoo – công ty chuyên về thiết kế, phát triển và sản xuất các thiết bị ngoại vi như chuột, bàn phím, tai nghe chuyên dùng cho gaming đang được các game thủ Việt Nam ưa chuộng trong thời gian gần đây.',
                     content: 'Công tắc phím cơ Omron quá quen thuộc với các sản phẩm Logitech nay đã song hành cùng Bàn phím cơ Rapoo Gaming V806. Với tuổi thọ một phím lên tới 70 triệu lượt nhấn, rất bền và đáng tin cậy trong trò chơi. Thiết kế không xung đột cho 104 phím trên bàn phím, cho phép bạn nhấn đồng thời bất kỳ số lượng phím nào và đảm bảo rằng mọi lệnh của bạn được đăng ký và thực hiện chính xác và nhanh chóng.',
-                    datecreate: '21/09/2021 lúc 2:26',
-                    datemodified: '21/09/2021 lúc 2:26',
-                    usercreate: 'tanhuynh',
-                    usermodified: 'tanhuynh',
+                    dateCreate: '21/09/2021 lúc 2:26',
+                    dateModified: '21/09/2021 lúc 2:26',
+                    userCreate: 'tanhuynh',
+                    userModified: 'tanhuynh',
                     active: false,
                     bin: false,
-                    follow: false,
+                    follow: true,
                     note: false
                 },
             ],
@@ -185,27 +176,38 @@ var Main = {
                 tableHistory: [
                     {
                         content: 'tanhuynh đã thay đổi sản phẩm',
-                        datecreate: '24-09-2021',
+                        dateCreate: '24-09-2021',
                         ip: '178.259.367.1.2',
-                        usercreate: 'tanhuynh'
+                        userCreate: 'tanhuynh'
                     },
                     {
                         content: 'tanhuynh đã thay đổi sản phẩm',
-                        datecreate: '24-09-2021',
+                        dateCreate: '24-09-2021',
                         ip: '178.259.367.1.2',
-                        usercreate: 'tanhuynh'
+                        userCreate: 'tanhuynh'
                     },
                     {
                         content: 'tanhuynh đã thay đổi sản phẩm',
-                        datecreate: '24-09-2021',
+                        dateCreate: '24-09-2021',
                         ip: '178.259.367.1.2',
-                        usercreate: 'tanhuynh'
+                        userCreate: 'tanhuynh'
                     },
                     {
                         content: 'tanhuynh đã thay đổi sản phẩm',
-                        datecreate: '24-09-2021',
+                        dateCreate: '24-09-2021',
                         ip: '178.259.367.1.2',
-                        usercreate: 'tanhuynh'
+                        userCreate: 'tanhuynh'
+                    }
+                ],
+                radioStatusNote: [
+                    {
+                        label: 'Rất quan trọng'
+                    },
+                    {
+                        label: 'Quan trọng'
+                    },
+                    {
+                        label: 'Bình thường'
                     }
                 ]
             },
@@ -237,6 +239,12 @@ var Main = {
                 usereditpassword: [],
                 password: '',
                 respassword: ''
+            },
+            noteForm: {
+                content: '',
+                status: 'Bình thường',
+                title: '',
+                date: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
             },
             productValidate: {
                 name: [
@@ -272,10 +280,14 @@ var Main = {
             createPasswordValidate: {
                 
             },
+            noteValidate: {
+
+            },
             multipleSelection: [],
             dialogFormCreateProductVisible: false,
             dialogFormEditProductVisible: false,
             dialogBodyDetailsProductVisible: false,
+            dialogFormNoteProductVisible: false,
             labelPositionTop: 'top',
             activeMain: 'index',
             activeDetailsProduct: 'body',
@@ -304,13 +316,12 @@ var Main = {
     },
     methods: {
         uploadimage()
-        {
-            const preview = document.getElementById("myImage");
+        { 
             const file = document.querySelector('input[type=file]').files[0];
+            const preview = document.getElementById("myImage");
             const reader = new FileReader();
 
             reader.addEventListener("load", function () {
-                // convert image file to base64 string
                 preview.src = reader.result;
             }, false);
         
@@ -333,10 +344,10 @@ var Main = {
             that.view = row.view;
             that.describe = row.describe;
             that.content = row.content;
-            that.datecreate = row.datecreate;
-            that.datemodified = row.datemodified;
-            that.usercreate = row.usercreate;
-            that.usermodified = row.usermodified;
+            that.dateCreate = row.dateCreate;
+            that.dateModified = row.dateModified;
+            that.userCreate = row.userCreate;
+            that.userModified = row.userModified;
             that.active = row.active;
             that.bin = row.bin;
             that.follow = row.follow;
@@ -408,6 +419,41 @@ var Main = {
             that.dialogFormEditProductVisible = true;
             that.title = "Sửa sản phẩm - " + row.name;
         },
+        clickBinProduct(row)
+        {
+            let that = this;
+            that.$confirm('Bạn có chắc muốn xoá sản phẩm - '+row.name+' vào thùng rác?', 'Cảnh báo', {
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Đóng',
+                type: 'warning'
+                }).then(() => {
+
+                    that.$notify({
+                        title: 'Thành công',
+                        message: 'Xoá ['+row.name+'] vào thùng rác',
+                        type: 'success'
+                    });
+
+                }).catch(() => {
+
+                    that.$notify.error({
+                        title: 'Thất bại',
+                        message: 'Xoá ['+row.name+'] thất bại'
+                    });      
+
+            });
+        },
+        clickFollowProduct(row)
+        {
+            console.log(row._id);
+        },
+        clickNoteProduct(row)
+        {
+            let that = this;
+            this.clearForm();
+            that.dialogFormNoteProductVisible = true;
+            that.title = "Chú ý sản phẩm - " + row.name;
+        },
         createProduct(productForm)
         {
             let that = this;
@@ -426,19 +472,19 @@ var Main = {
             that.isProgressCreateAPI = true;
             that.$refs[productAPIForm].validate((valid) => {
                 if (valid) {
-                    console.log(this.productAPIForm);
                     axios.get(this.productAPIForm.link)
                         .then(function (response) {
-                            // handle success
+
                             console.log(response.data);
                             that.listData.indexProductAPI = response.data;
+
                         })
                         .catch(function (error) {
-                            // handle error
+                            
                             console.log(error);
                         })
                         .then(function () {
-                            // always executed
+                            
                         });
                 } else {
                     console.log('error submit!!');
@@ -454,6 +500,28 @@ var Main = {
                     console.log(that.createPasswordForm);
                 } else {
                     console.log('error submit!!');
+                    return false;
+                }
+            });
+        },
+        createNoteProduct(noteForm)
+        {
+            let that = this;
+            that.$refs[noteForm].validate((valid) => {
+                if (valid) {
+
+                    console.log(that.noteForm);
+                    that.$notify({
+                        title: 'Thành công',
+                        message: 'Thêm chú ['+that.noteForm.title+'] thành công',
+                        type: 'success'
+                    });
+
+                } else {
+                    that.$notify.error({
+                        title: 'Thất bại',
+                        message: 'Thêm chú ý thất bại'
+                    }); 
                     return false;
                 }
             });

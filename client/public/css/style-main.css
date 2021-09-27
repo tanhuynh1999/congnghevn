@@ -1,33 +1,27 @@
-:root{
-    
-}
+:root {}
 
-*{
+* {}
 
-}
-
-html{
-
-}
+html {}
 
 /*common*/
-.cp-icon{
+.cp-icon {
     cursor: pointer;
 }
 
-.cp{
+.cp {
     cursor: pointer;
 }
 
-.cp-icon:hover{
+.cp-icon:hover {
     font-size: 18px;
 }
 
-.w-100{
+.w-100 {
     width: 100%;
 }
 
-.ml-2{
+.ml-2 {
     margin-left: 2%;
 }
 
@@ -35,30 +29,24 @@ html{
     margin-top: 2%;
 }
 
-.float-right{
+.float-right {
     float: right;
 }
 
 /*--------------------*/
-.cn-table{
+.cn-table {}
 
-}
-
-.cn-table .image{
+.cn-table .image {
     height: 100px;
 }
 
-.cn-filter{
-
-}
+.cn-filter {}
 
 .cn-filter .dropdown-menu {
     left: -100px;
 }
 
-.cn-create{
-
-}
+.cn-create {}
 
 .cn-create .el-dialog {
     width: 70%;
@@ -73,12 +61,12 @@ html{
     margin-bottom: 10px;
 }
 
-.cn-create .image-upload{
+.cn-create .image-upload {
     width: 200px;
     height: 180px;
 }
 
-.cn-create .image-upload:hover{
+.cn-create .image-upload:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
@@ -95,7 +83,7 @@ html{
     width: 70%;
 }
 
-.cn-edit .image-upload{
+.cn-edit .image-upload {
     width: 200px;
     height: 180px;
 }
@@ -104,7 +92,15 @@ html{
     width: 70%;
 }
 
-.cn-details .img{
+.cn-details .img {
     width: 230px;
     height: 200px;
+}
+
+.cn-note .el-dialog {
+    width: 70%;
+}
+
+.el-message-box {
+    margin-top: -40%;
 }

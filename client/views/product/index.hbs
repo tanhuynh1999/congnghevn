@@ -11,72 +11,100 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-sm-12 table-responsive">
-                            {{> product/header}}
-                            <el-tabs v-model="activeMain" 
-                                     @tab-click="handleClick">
-                                <el-tab-pane :label="item.label" 
-                                             :name="item.name"
-                                             v-for="item in listData.tabsMain">
-                                        {{> product/filter}}
-                                        <el-table class="cn-table"
-                                                 ref="multipleTable"
-                                                 :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-                                                 style="width: 100%"
-                                                 @selection-change="handleSelectionChange">
-                                            <el-table-column type="selection"
-                                                             width="55">
-                                            </el-table-column>
-                                            <el-table-column type="index"
-                                                             label="STT"
-                                                             width="50">
-                                            </el-table-column>
-                                            <el-table-column property="code"
-                                                             label="Mã"
-                                                             width="55">
-                                            </el-table-column>
-                                            <el-table-column label="Hình ảnh"
-                                                             width="200">
-                                                <template slot-scope="scope">
-                                                    <img :src="scope.row.image" alt="" class="image">
-                                                </template>
-                                            </el-table-column>
-                                            <el-table-column property="name"
-                                                             label="Tên sản phẩm">
-                                            </el-table-column>
-                                            <el-table-column property="category"
-                                                             label="Danh mục">
-                                            </el-table-column>
-                                            <el-table-column property="price"
-                                                             label="Giá">
-                                            </el-table-column>
-                                            <el-table-column property="datecreate"
-                                                             label="Ngày tạo">
-                                            </el-table-column>
-                                            <el-table-column property="datemodified"
-                                                             label="Ngày sửa">
-                                            </el-table-column>
-                                            <el-table-column label="Tình trạng">
-                                                <template slot-scope="scope">
-                                                    <el-switch v-model="scope.row.active"></el-switch>
-                                                </template>
-                                            </el-table-column>
-                                            <el-table-column property="view"
-                                                             label="Lượt xem">
-                                            </el-table-column>
-                                            <el-table-column label="Hoạt động">
-                                                <template slot-scope="scope">
+                            {{> product/common/header}}
+                            <el-tabs v-model="activeMain" @tab-click="handleClick">
+                                <el-tab-pane :label="item.label" :name="item.name" v-for="item in listData.tabsMain">
+                                    {{> product/common/filter}}
+                                    <el-table class="cn-table" ref="multipleTable"
+                                        :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+                                        style="width: 100%" @selection-change="handleSelectionChange">
+                                        <el-table-column type="selection" width="55">
+                                        </el-table-column>
+                                        <el-table-column type="index" label="STT" width="50">
+                                        </el-table-column>
+                                        <el-table-column property="code" label="Mã" width="55">
+                                        </el-table-column>
+                                        <el-table-column label="Hình ảnh" width="200">
+                                            <template slot-scope="scope">
+                                                <img :src="scope.row.image" alt="" class="image">
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column property="name" label="Tên sản phẩm">
+                                        </el-table-column>
+                                        <el-table-column property="category" label="Danh mục">
+                                        </el-table-column>
+                                        <el-table-column property="price" label="Giá">
+                                        </el-table-column>
+                                        <el-table-column property="dateCreate" label="Ngày tạo">
+                                        </el-table-column>
+                                        <el-table-column property="dateModified" label="Ngày sửa">
+                                        </el-table-column>
+                                        <el-table-column label="Tình trạng">
+                                            <template slot-scope="scope">
+                                                <el-switch v-model="scope.row.active"></el-switch>
+                                            </template>
+                                        </el-table-column>
+                                        <el-table-column property="view" label="Lượt xem">
+                                        </el-table-column>
+                                        <el-table-column label="Hoạt động">
+                                            <template slot-scope="scope">
+                                                <el-tooltip class="item" effect="dark" content="Xem chi tiết"
+                                                    placement="top-end">
                                                     <span @click="clickDetailsProduct(scope.row)">
                                                         <i class="fa fa-eye cp-icon" aria-hidden="true"></i> |
                                                     </span>
+                                                </el-tooltip>
+
+                                                <el-tooltip class="item" effect="dark" content="Sửa sản phẩm"
+                                                    placement="top-end">
                                                     <span @click="clickEditProduct(scope.row)">
                                                         <i class="fa fa-edit cp-icon" aria-hidden="true"></i> |
                                                     </span>
-                                                    <i class="fa fa-bell cp-icon" aria-hidden="true"></i> |
-                                                    <i class="fa fa-comment cp-icon" aria-hidden="true"></i> |
-                                                    <i class="fa fa-trash cp-icon" aria-hidden="true"></i> 
-                                                </template>
-                                            </el-table-column>
-                                    </el-table>                
+                                                </el-tooltip>
+
+                                                <el-tooltip class="item" effect="dark" content="Theo dõi"
+                                                    placement="top-end">
+                                                    <span v-if="scope.row.follow == false"
+                                                        @click="clickFollowProduct(scope.row)">
+                                                        <i class="fa fa-bell cp-icon" aria-hidden="true"></i> |
+                                                    </span>
+                                                </el-tooltip>
+
+                                                <el-tooltip class="item" effect="dark" content="Huỷ theo dõi"
+                                                    placement="top-end">
+                                                    <span v-if="scope.row.follow == true"
+                                                        @click="clickFollowProduct(scope.row)">
+                                                        <i class="fa fa-bell cp-icon text-danger"
+                                                            aria-hidden="true"></i> |
+                                                    </span>
+                                                </el-tooltip>
+
+                                                <el-tooltip class="item" effect="dark" content="Chú ý"
+                                                    placement="top-end">
+                                                    <span @click="clickNoteProduct(scope.row)">
+                                                        <i class="fa fa-comment cp-icon" aria-hidden="true"></i> |
+                                                    </span>
+                                                </el-tooltip>
+
+
+                                                <el-tooltip class="item" effect="dark" content="Xoá vào thùng rác"
+                                                    placement="top-end">
+                                                    <span @click="clickBinProduct(scope.row)"
+                                                        v-if="scope.row.bin == false">
+                                                        <i class="fa fa-trash cp-icon" aria-hidden="true"></i>
+                                                    </span>
+                                                </el-tooltip>
+
+                                                <el-tooltip class="item" effect="dark" content="Khôi phục"
+                                                    placement="top-end">
+                                                    <span @click="clickBinProduct(scope.row)"
+                                                        v-if="scope.row.bin == true">
+                                                        <i class="fas fa-retweet cp-icon" aria-hidden="true"></i>
+                                                    </span>
+                                                </el-tooltip>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
                                 </el-tab-pane>
                             </el-tabs>
                         </div>
@@ -88,5 +116,6 @@
     {{> product/dialog-create}}
     {{> product/dialog-edit}}
     {{> product/dialog-details}}
+    {{> product/dialog-note}}
 </div>
 <script src="js/product/app.js"></script>
